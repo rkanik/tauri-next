@@ -1,6 +1,6 @@
-import Image from 'next/image'
+import { TPage } from '@/types'
 
-export default function Page() {
+export default (function () {
 	return (
 		<div>
 			<h1>About</h1>
@@ -12,4 +12,4 @@ export default function Page() {
 			</p>
 		</div>
 	)
-}
+} satisfies TPage)

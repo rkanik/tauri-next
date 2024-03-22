@@ -1,4 +1,6 @@
-export default function Page() {
+import { TPage } from '@/types'
+
+export default (function () {
 	return (
 		<main>
 			<h1>Home</h1>
@@ -10,4 +12,4 @@ export default function Page() {
 			</p>
 		</main>
 	)
-}
+} satisfies TPage)

@@ -1,7 +1,7 @@
 import type { TLayout } from '@/types'
 import Link from 'next/link'
 
-export default (function Layout({ children }) {
+export default (function ({ children }) {
 	return (
 		<div>
 			<div>
