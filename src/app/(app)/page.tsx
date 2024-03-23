@@ -1,6 +1,14 @@
 import { TPage } from '@/types'
+import { createClient } from '@/utils/supabase/server'
+// import { createClient } from '@/src/utils/supabase/server'
+// import { cookies } from 'next/headers'
 
-export default (function () {
+export default (async function () {
+	// const cookieStore = cookies()
+	const supabase = createClient()
+
+	const { data: todos } = await supabase.from('projects').select()
+
 	return (
 		<main>
 			<h1>Home</h1>
@@ -10,6 +18,11 @@ export default (function () {
 				esse sit totam excepturi! Sit quas doloribus aperiam adipisci, minus
 				explicabo laudantium.
 			</p>
+			<div>
+				{todos?.map((todo) => (
+					<li>{todo.name}</li>
+				))}
+			</div>
 		</main>
 	)
 } satisfies TPage)
