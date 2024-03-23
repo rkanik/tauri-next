@@ -1,16 +1,31 @@
+'use client'
+
 import type { TLayout } from '@/types'
+import { createClient } from '@/utils/supabase/client'
+import Link from 'next/link'
 
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
-import { createClient } from '@/utils/supabase/server'
+export default (function ({ children }) {
+	const supabase = createClient()
 
-import LayoutClient from './layout-client'
+	const onClickSignOut = async () => {
+		if (!window.confirm('Are you sure to sign out?')) return
 
-export default (async function ({ children }) {
-	const supabase = createClient(cookies())
+		await supabase.auth.signOut()
+	}
 
-	const { error, data } = await supabase.auth.getSession()
-	if (error || !data.session) return redirect('/signin')
-
-	return <LayoutClient>{children}</LayoutClient>
+	return (
+		<div>
+			<header className="flex items-center justify-between">
+				<div>
+					<Link href="/">Home</Link>
+					<Link href="/about">About</Link>
+					<Link href="/signin">Sign In</Link>
+				</div>
+				<div>
+					<button onClick={onClickSignOut}>Logout</button>
+				</div>
+			</header>
+			{children}
+		</div>
+	)
 } satisfies TLayout)

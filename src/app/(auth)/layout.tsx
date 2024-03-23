@@ -1,14 +1,23 @@
-import type { TLayout } from '@/types'
+'use client'
 
-import { cookies } from 'next/headers'
-import { createClient } from '@/utils/supabase/server'
-import { redirect } from 'next/navigation'
+import { TLayout } from '@/types'
+import { useEffect } from 'react'
 
-export default (async function ({ children }) {
-	const supabase = createClient(cookies())
-
-	const { data } = await supabase.auth.getSession()
-	if (data.session) return redirect('/')
-
+export default (function ({ children }) {
+	useEffect(() => {
+		// createDir('data', {
+		// 	dir: BaseDirectory.AppConfig,
+		// 	recursive: true,
+		// })
+		// readTextFile('data/cookies.json', {
+		// 	dir: BaseDirectory.App,
+		// }).then((contents) => {
+		// 	console.log(JSON.parse(contents))
+		// })
+		// writeFile('data/cookies.json', JSON.stringify({ test: 'hello' }), {
+		// 	dir: BaseDirectory.App,
+		// 	// append: true,
+		// })
+	}, [])
 	return <>{children}</>
 } satisfies TLayout)

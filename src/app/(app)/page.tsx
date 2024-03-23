@@ -1,10 +1,7 @@
 import { TPage } from '@/types'
 import { createClient } from '@/utils/supabase/server'
-// import { createClient } from '@/src/utils/supabase/server'
-// import { cookies } from 'next/headers'
 
 export default (async function () {
-	// const cookieStore = cookies()
 	const supabase = createClient()
 
 	const { data: todos } = await supabase.from('projects').select()
